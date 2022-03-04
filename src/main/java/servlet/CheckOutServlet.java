@@ -37,7 +37,7 @@ public class CheckOutServlet extends HttpServlet {
 					Order order = new Order();
 					order.setId(c.getId());
 					order.setUid(auth.getId());
-					order.setQunatity(c.getQuantity());
+					order.setQuantity(c.getQuantity());
 					order.setDate(formatter.format(date));
 					
 					OrderDao oDao = new OrderDao(DbCon.getConnection());

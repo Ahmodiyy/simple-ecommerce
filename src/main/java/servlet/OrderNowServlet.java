@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import connection.DbCon;
 
-
 @WebServlet("/order-now")
 public class OrderNowServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
+
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
@@ -35,12 +35,12 @@ public class OrderNowServlet extends HttpServlet {
                 String productId = request.getParameter("id");
                 int productQuantity = Integer.parseInt(request.getParameter("quantity"));
                 if (productQuantity <= 0) {
-                	productQuantity = 1;
+                    productQuantity = 1;
                 }
                 Order orderModel = new Order();
                 orderModel.setId(Integer.parseInt(productId));
                 orderModel.setUid(auth.getId());
-                orderModel.setQunatity(productQuantity);
+                orderModel.setQuantity(productQuantity);
                 orderModel.setDate(formatter.format(date));
 
                 OrderDao orderDao = new OrderDao(DbCon.getConnection());
@@ -50,7 +50,7 @@ public class OrderNowServlet extends HttpServlet {
                     if (cart_list != null) {
                         for (Cart c : cart_list) {
                             if (c.getId() == Integer.parseInt(productId)) {
-                                cart_list.remove(cart_list.indexOf(c));
+                                cart_list.remove(c);
                                 break;
                             }
                         }
@@ -63,14 +63,14 @@ public class OrderNowServlet extends HttpServlet {
                 response.sendRedirect("login.jsp");
             }
 
-        } catch (ClassNotFoundException|SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	}
-    
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 
 }

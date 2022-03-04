@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("auth", user);
 				response.sendRedirect("index.jsp");
 			} else {
-				out.println("there is no user");
+				out.println("there is no user ");
 			}
 
 		} catch (ClassNotFoundException|SQLException e) {

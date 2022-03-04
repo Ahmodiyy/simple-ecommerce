@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%                                    if (cart_list != null) {
+                    <%     if (cart_list != null) {
                             for (Cart c : cartProduct) {
                     %>
                     <tr>
@@ -76,8 +76,8 @@
                     </tr>
 
                     <%
-                                        }
-                                    }%>
+                            }
+                        }%>
                 </tbody>
             </table>
         </div>

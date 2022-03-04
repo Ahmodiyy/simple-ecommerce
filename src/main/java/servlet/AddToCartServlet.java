@@ -36,18 +36,15 @@ public class AddToCartServlet extends HttpServlet {
                 session.setAttribute("cart-list", cartList);
                 response.sendRedirect("index.jsp");
             } else {
-                cartList = cart_list;
-
                 boolean exist = false;
                 for (Cart c : cart_list) {
                     if (c.getId() == id) {
                         exist = true;
-                        out.println("<h3 style='color:crimson; text-align: center'>Item Already in Cart. <a href='cart.jsp'>GO to Cart Page</a></h3>");
+                        out.println("<h3 style='text-align: center'>Item Already in Cart. <a href='cart.jsp'>Return to Cart Page</a></h3>");
                     }
                 }
-
                 if (!exist) {
-                    cartList.add(cm);
+                    cart_list.add(cm);
                     response.sendRedirect("index.jsp");
                 }
             }

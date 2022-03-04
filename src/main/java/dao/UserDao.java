@@ -33,4 +33,17 @@ public class UserDao {
         }
         return user;
     }
+    
+    public void register(String name, String email, String password) {
+        try {
+            query = "insert into users (name, email, password) values(?, ?, ?);";
+            pst = this.con.prepareStatement(query);
+            pst.setString(1, name);
+            pst.setString(2, email);
+            pst.setString(3, password);
+            pst.execute();
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+    }
 }
